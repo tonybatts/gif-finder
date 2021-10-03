@@ -137,7 +137,7 @@ const getSearchResults = async (searchTerm) => {
   }
 
   const response = await fetch(
-    `http://api.giphy.com/v1/gifs/search?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&q=${searchTerm}&limit=${limit}&offset=${total}`
+    `http://api.giphy.com/v1/gifs/search?api_key=YOUR_API_KEY&q=${searchTerm}&limit=${limit}&offset=${total}`
   );
 
   console.log("fetched");
