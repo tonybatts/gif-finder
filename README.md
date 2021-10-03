@@ -3,5 +3,5 @@ This chrome extension allows you to easily search for that perfect gif without m
 
 Coming soon to Chrome Store
 
-<img align="right" src="https://github.com/tonybatts/gif-finder/raw/main/oops/dancecat.gif">
+<img align="left" width="200px" height="200px" style="object-fit: cover;" src="https://github.com/tonybatts/gif-finder/raw/main/oops/dancecat.gif">
 
