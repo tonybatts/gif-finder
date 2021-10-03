@@ -7,15 +7,21 @@ let userInput = "";
 let total = 0;
 
 const oopsGifs = [
-  "canyounot.gif",
-  "dancecat.gif",
-  "doggo.gif",
-  "nevergonna.gif",
-  "superhot.gif",
-  "thumbsup.gif",
-  "typingcat.gif",
-  "typingcat2.gif",
-  "spongebob.gif"
+  "https://media0.giphy.com/media/AAsj7jdrHjtp6/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=g",
+  "https://media3.giphy.com/media/jpbnoe3UIa8TU8LM13/giphy.gif?cid=182a4348o24dqxbn5fm7f9568ctlson1a9fs2ex8ycyk4651&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/54Vj1kxvgyF4k/giphy.gif?cid=182a4348gbltento7lxsg2j5yg3eokhy3smbb6jfne7wtyei&rid=giphy.gif&ct=g",
+  "https://media2.giphy.com/media/olAik8MhYOB9K/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/cF7QqO5DYdft6/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=g",
+  "https://media2.giphy.com/media/111ebonMs90YLu/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=g",
+  "https://media0.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif?cid=182a4348v2md4cbo7vffdpjfzpvzw7w95kdhgew6gufsoz2z&rid=giphy.gif&ct=g",
+  "https://media4.giphy.com/media/o0vwzuFwCGAFO/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=gcat2.gif",
+  "https://media0.giphy.com/media/tvU9iTev6uBIQ/giphy.gif?cid=182a43483wo1z7u13dql1ftfljnn03vb7fnqyw6eiq6dthud&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/v0eHX3n28wvoQ/giphy.gif?cid=182a4348jyh6an2korkw8m2wlbnep3u42m80upvzsbrsfgoo&rid=giphy.gif&ct=g",
+  "https://media0.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif?cid=182a4348v2md4cbo7vffdpjfzpvzw7w95kdhgew6gufsoz2z&rid=giphy.gif&ct=g",
+  "https://media2.giphy.com/media/l0IylOPCNkiqOgMyA/giphy.gif?cid=182a4348plfr05yv1wv0t320srz1eas5ijhll5jzfv16x1yp&rid=giphy.gif&ct=g",
+  "https://media3.giphy.com/media/W0QduXZQEcNEa8r0oY/giphy.gif?cid=182a43487i0wek45juxhkgrw9pdyixjn5ns0ycbbbitcjizz&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/20k1punZ5bpmM/giphy.gif?cid=182a4348sx75np3xn0f5u3qa74o0bbyvy1cr1roqmmyy3wfo&rid=giphy.gif&ct=g",
+  "https://media4.giphy.com/media/xUPGcvrXl7RBEp3zC8/giphy.gif?cid=182a434869cz5xp8h6v76ff4vvl538gpqt8htc97xf5f2qsu&rid=giphy.gif&ct=g"
 ];
 
 const getRandomNumber = (min, max) => {
@@ -50,11 +56,11 @@ const generateList = ({ data }) => {
     const imgEl = document.createElement("img");
 
     imgEl.classList.add("oops-gif");
-    imgEl.src = `oops/${oopsGifs[randomNum]}`;
+    // imgEl.src = `oops/${oopsGifs[randomNum]}`;
+    imgEl.src = oopsGifs[randomNum];
     noResultWrapperEl.classList.add("center-no-results");
     noResultEl.classList.add("no-results-small");
-    noResultEl.textContent =
-      "No results found. Here's a gif I picked just for you!";
+    noResultEl.textContent = "No results found :( Try another search term";
 
     noResultWrapperEl.appendChild(noResultEl);
     noResultWrapperEl.appendChild(imgEl);
