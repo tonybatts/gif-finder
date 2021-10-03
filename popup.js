@@ -6,6 +6,7 @@ const limit = 50;
 let userInput = "";
 let total = 0;
 
+// Gifs used when there are no results
 const oopsGifs = [
   "https://media0.giphy.com/media/AAsj7jdrHjtp6/giphy.gif?cid=182a4348jfwti0jl6ak7m0krwue26dzfvh11qopb270bguug&rid=giphy.gif&ct=g",
   "https://media3.giphy.com/media/jpbnoe3UIa8TU8LM13/giphy.gif?cid=182a4348o24dqxbn5fm7f9568ctlson1a9fs2ex8ycyk4651&rid=giphy.gif&ct=g",
@@ -21,51 +22,87 @@ const oopsGifs = [
   "https://media2.giphy.com/media/l0IylOPCNkiqOgMyA/giphy.gif?cid=182a4348plfr05yv1wv0t320srz1eas5ijhll5jzfv16x1yp&rid=giphy.gif&ct=g",
   "https://media3.giphy.com/media/W0QduXZQEcNEa8r0oY/giphy.gif?cid=182a43487i0wek45juxhkgrw9pdyixjn5ns0ycbbbitcjizz&rid=giphy.gif&ct=g",
   "https://media1.giphy.com/media/20k1punZ5bpmM/giphy.gif?cid=182a4348sx75np3xn0f5u3qa74o0bbyvy1cr1roqmmyy3wfo&rid=giphy.gif&ct=g",
-  "https://media4.giphy.com/media/xUPGcvrXl7RBEp3zC8/giphy.gif?cid=182a434869cz5xp8h6v76ff4vvl538gpqt8htc97xf5f2qsu&rid=giphy.gif&ct=g"
+  "https://media4.giphy.com/media/xUPGcvrXl7RBEp3zC8/giphy.gif?cid=182a434869cz5xp8h6v76ff4vvl538gpqt8htc97xf5f2qsu&rid=giphy.gif&ct=g",
+  "https://media2.giphy.com/media/B37cYPCruqwwg/giphy.gif?cid=182a4348f1rym9ed8nsla9rfb28v5qn0titsqlevihzrdtn0&rid=giphy.gif&ct=g",
+  "https://media0.giphy.com/media/LSmULmByAQHQs/giphy.gif?cid=182a43485b646qzlg2nuiig5p2oo0ib7aolr3gdelgnrwtjg&rid=giphy.gif&ct=g",
+  "https://media0.giphy.com/media/3ornk6UHtk276vLtkY/giphy.gif?cid=182a43485b646qzlg2nuiig5p2oo0ib7aolr3gdelgnrwtjg&rid=giphy.gif&ct=g",
+  "https://media4.giphy.com/media/Jn9Td3EAh6cJfiyg60/giphy.gif?cid=182a43483udg5pfkwcx9bsjxhenbn890848kmt5q8tbpj75s&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/a93jwI0wkWTQs/giphy.gif?cid=182a4348kxk8fzhrnhtdg5a00js4ssss7owwt3n8dsmwfm05&rid=giphy.gif&ct=g"
 ];
 
+// used to pick random gif for no results view
 const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // Use the current input to load more gifs
-const loadGifs = async (total, limit) => {
+const loadGifs = async () => {
   userInput = document.querySelector("input").value;
 
-  // return if user cleared input and hit enter
   if (userInput.length === 0) {
+    // return if user cleared input and hit enter
     return;
   }
 
   try {
     // call the API to get gifs
-    await getSearchResults(userInput, total, limit);
+    await getSearchResults(userInput);
   } catch (error) {
     console.log(error.message);
   }
 };
 
+const noResults = () => {
+  document.querySelector(".popup-container").textContent = "";
+
+  const randomNum = getRandomNumber(0, oopsGifs.length - 1);
+  const noResultWrapperEl = document.createElement("div");
+  const noResultEl = document.createElement("h1");
+  const imgEl = document.createElement("img");
+
+  imgEl.classList.add("oops-gif");
+  imgEl.src = oopsGifs[randomNum];
+  noResultWrapperEl.classList.add("center-no-results");
+  noResultEl.classList.add("no-results-small");
+  noResultEl.textContent = "No results found :( Try another search term";
+
+  noResultWrapperEl.appendChild(noResultEl);
+  noResultWrapperEl.appendChild(imgEl);
+  document.querySelector(".popup-container").appendChild(noResultWrapperEl);
+};
+
+const endOfList = () => {
+  const noResultsEl = document.querySelector(".center-no-results");
+  if (noResultsEl) {
+    noResultsEl.remove();
+  }
+
+  const noResultWrapperEl = document.createElement("div");
+  const noResultEl = document.createElement("h1");
+
+  noResultWrapperEl.classList.add("center-no-results");
+  noResultWrapperEl.style.height = "150px";
+  noResultEl.classList.add("no-results-small");
+  noResultEl.textContent = "No more results for this search term";
+
+  noResultWrapperEl.appendChild(noResultEl);
+  document.querySelector(".popup-container").appendChild(noResultWrapperEl);
+};
+
 // Use the data from the API to generate the list of gifs and append to dom
 const generateList = ({ data }) => {
+  total = total + data.length;
+
+  // return if user reaches end of list and there are no more results to load
+  if (total > 0 && data.length === 0) {
+    console.log("end of list");
+    endOfList();
+    return;
+  }
+
+  // handle no results
   if (data.length === 0) {
-    document.querySelector(".popup-container").textContent = "";
-
-    const randomNum = getRandomNumber(0, oopsGifs.length - 1);
-    const noResultWrapperEl = document.createElement("div");
-    const noResultEl = document.createElement("h1");
-    const imgEl = document.createElement("img");
-
-    imgEl.classList.add("oops-gif");
-    // imgEl.src = `oops/${oopsGifs[randomNum]}`;
-    imgEl.src = oopsGifs[randomNum];
-    noResultWrapperEl.classList.add("center-no-results");
-    noResultEl.classList.add("no-results-small");
-    noResultEl.textContent = "No results found :( Try another search term";
-
-    noResultWrapperEl.appendChild(noResultEl);
-    noResultWrapperEl.appendChild(imgEl);
-    document.querySelector(".popup-container").appendChild(noResultWrapperEl);
-
+    noResults();
     return;
   }
 
@@ -83,7 +120,13 @@ const generateList = ({ data }) => {
 };
 
 // make API request for gif data
-const getSearchResults = async (searchTerm, total, limit) => {
+const getSearchResults = async (searchTerm) => {
+  if (searchTerm.length === 0) {
+    noResults();
+
+    return;
+  }
+
   const response = await fetch(
     `http://api.giphy.com/v1/gifs/search?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&q=${searchTerm}&limit=${limit}&offset=${total}`
   );
@@ -91,8 +134,6 @@ const getSearchResults = async (searchTerm, total, limit) => {
   if (!response.ok) {
     throw new Error(`An error occured: ${response.status}`);
   }
-
-  total = total + response.total;
 
   const parsedData = await response.json();
 
@@ -102,9 +143,10 @@ const getSearchResults = async (searchTerm, total, limit) => {
 // When user hits enter call start the data flow
 document.querySelector("input").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
+    total = 0;
     document.querySelector(".popup-container").textContent = "";
     window.scrollTo(0, 0);
-    getSearchResults(e.target.value, limit);
+    getSearchResults(e.target.value);
   }
 });
 
@@ -115,10 +157,10 @@ document.addEventListener(
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (
-      scrollTop + clientHeight >= scrollHeight - 350 &&
+      scrollTop + clientHeight >= scrollHeight - 5 &&
       !document.querySelector(".center-no-results")
     ) {
-      loadGifs(total, limit);
+      loadGifs();
     }
   },
   {
