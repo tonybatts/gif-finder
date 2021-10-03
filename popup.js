@@ -27,7 +27,17 @@ const oopsGifs = [
   "https://media0.giphy.com/media/LSmULmByAQHQs/giphy.gif?cid=182a43485b646qzlg2nuiig5p2oo0ib7aolr3gdelgnrwtjg&rid=giphy.gif&ct=g",
   "https://media0.giphy.com/media/3ornk6UHtk276vLtkY/giphy.gif?cid=182a43485b646qzlg2nuiig5p2oo0ib7aolr3gdelgnrwtjg&rid=giphy.gif&ct=g",
   "https://media4.giphy.com/media/Jn9Td3EAh6cJfiyg60/giphy.gif?cid=182a43483udg5pfkwcx9bsjxhenbn890848kmt5q8tbpj75s&rid=giphy.gif&ct=g",
-  "https://media1.giphy.com/media/a93jwI0wkWTQs/giphy.gif?cid=182a4348kxk8fzhrnhtdg5a00js4ssss7owwt3n8dsmwfm05&rid=giphy.gif&ct=g"
+  "https://media1.giphy.com/media/a93jwI0wkWTQs/giphy.gif?cid=182a4348kxk8fzhrnhtdg5a00js4ssss7owwt3n8dsmwfm05&rid=giphy.gif&ct=g",
+  "https://media4.giphy.com/media/baPIkfAo0Iv5K/giphy.gif?cid=182a4348kfkn1zs3fuioos7napeou6cqzrc1itt07papqcwt&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/SUzPI5wAkp6UXMEkok/giphy.gif?cid=182a4348kfkn1zs3fuioos7napeou6cqzrc1itt07papqcwt&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/gfO3FcnL8ZK9wVgr6t/giphy.gif?cid=182a4348vpa2h9ufibofbh7gvh2rw0y1ekmxzn7dyr23w6l4&rid=giphy.gif&ct=g",
+  "https://media2.giphy.com/media/dwRwAXIe0tkz0EWFTr/giphy.gif?cid=182a4348vpa2h9ufibofbh7gvh2rw0y1ekmxzn7dyr23w6l4&rid=giphy.gif&ct=g",
+  "https://media3.giphy.com/media/26hkhPJ5hmdD87HYA/giphy.gif?cid=182a4348za7a4spgeh71y38r1xl505n6z4am023zki2enke9&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/OSuaE6AknuRc7syZXp/giphy.gif?cid=182a4348za7a4spgeh71y38r1xl505n6z4am023zki2enke9&rid=giphy.gif&ct=g",
+  "https://media3.giphy.com/media/Az1CJ2MEjmsp2/giphy.gif?cid=182a4348za7a4spgeh71y38r1xl505n6z4am023zki2enke9&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/giXLnhxp60zEEIkq8K/giphy.gif?cid=182a4348za7a4spgeh71y38r1xl505n6z4am023zki2enke9&rid=giphy.gif&ct=g",
+  "https://media3.giphy.com/media/3o7bu7Xzqkq8K3MsUg/giphy.gif?cid=182a4348vvhd4n24dw6o2c5m0vqrbxsrwtaaer7f8r4gykii&rid=giphy.gif&ct=g",
+  "https://media1.giphy.com/media/3orieMhcr3rkME9hkI/giphy.gif?cid=182a4348vvhd4n24dw6o2c5m0vqrbxsrwtaaer7f8r4gykii&rid=giphy.gif&ct=g"
 ];
 
 // used to pick random gif for no results view
@@ -123,13 +133,14 @@ const generateList = ({ data }) => {
 const getSearchResults = async (searchTerm) => {
   if (searchTerm.length === 0) {
     noResults();
-
     return;
   }
 
   const response = await fetch(
-    `http://api.giphy.com/v1/gifs/search?api_key=YOUR_API_KEY&q=${searchTerm}&limit=${limit}&offset=${total}`
+    `http://api.giphy.com/v1/gifs/search?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&q=${searchTerm}&limit=${limit}&offset=${total}`
   );
+
+  console.log("fetched");
 
   if (!response.ok) {
     throw new Error(`An error occured: ${response.status}`);
@@ -158,8 +169,10 @@ document.addEventListener(
 
     if (
       scrollTop + clientHeight >= scrollHeight - 5 &&
-      !document.querySelector(".center-no-results")
+      !document.querySelector(".center-no-results") &&
+      total !== 0
     ) {
+      console.log("bottom of page, loading more gifs");
       loadGifs();
     }
   },
