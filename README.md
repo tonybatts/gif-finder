@@ -45,7 +45,7 @@ Enter *GIF Finder*
 
 ### Built With
 
-* GIF Finder is powered by GIPHY using three API endpoints. Search, trending, and random.
+* GIPHY Endpoints: Search, Trending, and Random.
 * Vanilla Javascript
 * HTML
 * CSS 
