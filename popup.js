@@ -126,7 +126,7 @@ const getSearchResults = async (searchTerm) => {
 
   try {
     const response = await fetch(
-      `http://api.giphy.com/v1/gifs/search?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&q=${searchTerm}&limit=${limit}&offset=${total}`
+      `http://api.giphy.com/v1/gifs/search?api_key=YOUR_AIP_KEY&q=${searchTerm}&limit=${limit}&offset=${total}`
     );
 
     if (!response.ok) {
@@ -145,7 +145,7 @@ const getSearchResults = async (searchTerm) => {
 const getTrendingResults = async () => {
   try {
     const response = await fetch(
-      `http://api.giphy.com/v1/gifs/trending?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&&limit=${limit}&offset=${total}`
+      `http://api.giphy.com/v1/gifs/trending?api_key=YOUR_API_KEY&limit=${limit}&offset=${total}`
     );
 
     if (!response.ok) {
@@ -164,7 +164,7 @@ const getTrendingResults = async () => {
 const getRandomGif = async (keyWord) => {
   try {
     const response = await fetch(
-      `http://api.giphy.com/v1/gifs/random?api_key=H2vDwH21VkkjmAKNUMQUz0gB1omdiDCf&&tag=${keyWord}&rating=g`
+      `http://api.giphy.com/v1/gifs/random?api_key=YOUR_API_KEY&tag=${keyWord}&rating=g`
     );
 
     if (!response.ok) {
