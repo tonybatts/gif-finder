@@ -9,9 +9,6 @@
   <p align="center">
     An awesome Chrome Extension to find GIFS!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="#">View In Chrome Store</a>
   </p>
 </div>
