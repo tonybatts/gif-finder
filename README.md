@@ -9,7 +9,7 @@
   <p align="center">
     An awesome Chrome Extension to find GIFS!
     <br />
-    <a href="#">View In Chrome Store</a>
+    <a href="#">View In Chrome Store (coming soon)</a>
   </p>
 </div>
 
