@@ -1,5 +1,5 @@
 # GIF Finder
-Tired of heading to google for that perfect gif? 
+## Tired of heading to google for that perfect gif? 
 
 Use GIF Finder to quickly and easily search for gifs without the need to open a new tab and rummage through google results.
 
