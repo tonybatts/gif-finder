@@ -18,7 +18,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#gif-finder">GIF Finder Intro</a>
+      <a href="#about-the-project">GIF Finder Intro</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -30,7 +30,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## GIF Finder
+## About The Project
 ### Tired of heading to google for that perfect gif? 
 
 I found myself constantly googling for the perfect gif to make my coworkers laugh, and noticed I'd often be too little too late. To help right this wrong I decided to build an easy access extension that will up my Slack game.
