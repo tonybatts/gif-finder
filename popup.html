@@ -13,7 +13,11 @@
   <header>
     <div class="search-flex-wrapper">
       <div class="floating-search">
+        <img class="search-icon" src="search-icon.svg" alt="search icon">
         <input type="text" placeholder="Search gifs..." class="gif-search-bar">
+      </div>
+      <div class="trending-wrapper" title="Trending Gifs">
+        <span class="trending-hover"><img class="trending" src="icons/trending_up.svg"></span>
       </div>
     </div>
   </header>
@@ -21,18 +25,20 @@
     <div class="center-no-results">
       <div>
         <h1 class="no-results">GIF Finder</h1>
-        <h1 class="no-results-subtitle">Type in your search term and hit enter!</h1>
+        <h1 class="no-results-subtitle">Search for that perfect gif!</h1>
+        <h1 class="no-results-subtitle">Then click and drag to your desktop.</h1>
       </div>
       <img class="giphy giphy-dark" src="PoweredBy_200px-Black_HorizLogo.png" alt="gify attribution">
       <img class="giphy giphy-light" src="PoweredBy_200px-White_HorizText.png" alt="gify attribution">
     </div>
 
   </div>
-  <div class="loader">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
+
+  <!-- <div class="loader-wrapper">
+    <div class="loading-outer">
+      <div class="loading-inner"></div>
+    </div>
+  </div> -->
   <script src="popup.js"></script>
 </body>
 

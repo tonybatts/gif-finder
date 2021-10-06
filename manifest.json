@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "GIF Finder",
   "version": "1",
-  "description": "Search and find gifs",
-  "short_name": "Search and find gifs",
+  "description": "Search and discover your favorite gifs!",
+  "short_name": "Search and discover your favorite gifs!",
   "browser_action": {
     "default_icon": {
       "16": "icons/icon16.png",

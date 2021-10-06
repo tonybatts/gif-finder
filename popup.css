@@ -76,14 +76,18 @@ body {
   .giphy-dark {
     display: none;
   }
+
+  .trending-hover:hover {
+    background-color: #484b6a !important;
+  }
 }
 
 .popup-container {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   justify-content: flex-start;
-  /* margin-right: -6px; */
+  margin-right: -3px;
   /* margin-right: 5px;
   margin-left: 7px; */
   animation: fadeIn 0.5s;
@@ -94,8 +98,10 @@ body {
 }
 
 .gif-container {
-  width: 30%;
-  margin: 10px;
+  /* width: 30%; */
+  width: 33%;
+  /* margin: 10px; */
+  margin: 1px;
   height: 217px;
 }
 
@@ -104,7 +110,7 @@ body {
   height: 100%;
   object-fit: cover;
   cursor: grab;
-  border-radius: 6px;
+  /* border-radius: 6px; */
 }
 
 @keyframes fadeIn {
@@ -205,14 +211,36 @@ header {
   padding-top: 10px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   /* box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%); */
 }
 
+.trending-wrapper {
+  margin-top: 15px;
+  margin-right: 5px;
+}
+
+.trending {
+  width: 25px;
+}
+
+.trending-hover {
+  padding: 6px 6px;
+  display: block;
+  border-radius: 6px;
+}
+
+.trending-hover:hover {
+  background-color: #292a2d;
+  cursor: pointer;
+}
+
 .floating-search {
+  display: flex;
   width: 100%;
-  margin: 28px 20px 10px 20px;
+  margin: 28px 5px 10px 20px;
   border-radius: 6px;
   margin-top: 27px;
   background-color: #292a2d;
@@ -221,17 +249,14 @@ header {
 .gif-search-bar {
   font-size: 18px;
   background-color: #292a2d;
-  background-image: url("search-icon.png");
-  background-position: calc(100% - 3px) calc(100% - 8px);
-  background-repeat: no-repeat;
+  border-radius: 6px;
   width: 98%;
   border: 0;
   height: 1.7rem;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 5px;
   display: block;
   padding: 6px 0 7px;
   min-width: 0;
-  /* background: none; */
   box-sizing: content-box;
   animation-name: mui-auto-fill-cancel;
   letter-spacing: inherit;
@@ -239,6 +264,12 @@ header {
   -webkit-tap-highlight-color: transparent;
   caret-color: #9aa0a6;
   color: #9aa0a6;
+}
+
+.search-icon {
+  width: 25px;
+  padding-left: 8px;
+  cursor: pointer;
 }
 
 .floating-search:focus {
@@ -275,8 +306,8 @@ header {
 
 .giphy {
   position: absolute;
-  bottom: 21px;
-  right: 21px;
+  bottom: 15px;
+  right: 15px;
   width: 150px;
 }
 
@@ -286,9 +317,62 @@ header {
   font-weight: 600;
 }
 
+.figcaption {
+  color: #9aa0a6;
+  font-size: 10px;
+}
+
 .oops-gif {
-  width: 200px;
+  /* width: 200px; */
+  max-width: 100%;
   height: 200px;
   object-fit: cover;
   margin-top: 40px;
 }
+
+/* LOADER */
+/* .loader-wrapper {
+  height: 100px;
+  width: 100%;
+}
+.loading-outer {
+  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 256px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.loading-inner {
+  position: absolute;
+  width: 0px;
+  height: 4px;
+  left: 0px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: 2s infinite linear loadingAnimation;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    left: 0px;
+    width: 0px;
+  }
+
+  25% {
+    left: 0px;
+    width: 100px;
+  }
+
+  70% {
+    left: 200px;
+    width: 56px;
+  }
+
+  90% {
+    left: 256px;
+    width: 0px;
+  }
+} */
