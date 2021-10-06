@@ -60,7 +60,7 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 <!-- CONTACT -->
 ## Contact
 
-Tony Batts - [Instagram](https://twitter.com/your_username) - tonybatts@gmail.com
+Tony Batts - [Instagram](https://twitter.com/your_username) - [Linkedin](https://www.linkedin.com/in/tonybatts/) - tonybatts@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
