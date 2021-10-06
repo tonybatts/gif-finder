@@ -64,9 +64,6 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 <!-- CONTACT -->
 ## Contact
 
-Tony Batts - [@your_twitter](<!-- CONTACT -->
-## Contact
-
 Your Name - [IG](https://twitter.com/your_username) - tonybatts@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>e) - email@example.com
