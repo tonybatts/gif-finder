@@ -50,10 +50,6 @@ Enter *GIF Finder*
 * HTML
 * CSS 
 
-Coming soon to Chrome Store
-
-<img align="left" height="150px" style="object-fit: cover;" src="https://github.com/tonybatts/gif-finder/blob/main/cat.gif">
-
 <!-- LICENSE -->
 ## License
 
