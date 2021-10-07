@@ -45,7 +45,7 @@ Enter *GIF Finder*
 
 ### Built With
 
-* GIPHY Endpoints: Search, Trending, and Random.
+* Tenor Endpoints: Search, Trending, and Random.
 * Vanilla Javascript
 * HTML
 * CSS 
@@ -66,7 +66,7 @@ Tony Batts - [Instagram](https://twitter.com/your_username) - [Linkedin](https:/
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-* [GIPHY API's](https://developers.giphy.com/docs/api/endpoint/)
+* [Tenor API's](https://tenor.com/gifapi/documentation#endpoints-search)
 * [Icomoon icons](https://icomoon.io/app/#/select)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
