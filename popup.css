@@ -85,11 +85,8 @@ body {
 .popup-container {
   display: flex;
   flex-wrap: wrap;
-  /* margin-left: 10px; */
   justify-content: flex-start;
   margin-right: -3px;
-  /* margin-right: 5px;
-  margin-left: 7px; */
   animation: fadeIn 0.5s;
   -webkit-animation: fadeIn 0.5s;
   -moz-animation: fadeIn 0.5s;
@@ -98,9 +95,7 @@ body {
 }
 
 .gif-container {
-  /* width: 30%; */
   width: 33%;
-  /* margin: 10px; */
   margin: 1px;
   height: 217px;
 }
@@ -110,7 +105,6 @@ body {
   height: 100%;
   object-fit: cover;
   cursor: grab;
-  /* border-radius: 6px; */
 }
 
 @keyframes fadeIn {
@@ -173,9 +167,7 @@ body {
   position: relative;
   margin-top: 53px;
   width: 800px;
-  /* height: 600px; */
   height: 548px;
-  /* overflow: scroll; */
 }
 
 .wrapper {
@@ -213,8 +205,6 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%); */
 }
 
 .trending-wrapper {
@@ -323,56 +313,8 @@ header {
 }
 
 .oops-gif {
-  /* width: 200px; */
   max-width: 100%;
   height: 200px;
   object-fit: cover;
   margin-top: 40px;
 }
-
-/* LOADER */
-/* .loader-wrapper {
-  height: 100px;
-  width: 100%;
-}
-.loading-outer {
-  display: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 256px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.loading-inner {
-  position: absolute;
-  width: 0px;
-  height: 4px;
-  left: 0px;
-  background: rgba(255, 255, 255, 0.2);
-  animation: 2s infinite linear loadingAnimation;
-}
-
-@keyframes loadingAnimation {
-  0% {
-    left: 0px;
-    width: 0px;
-  }
-
-  25% {
-    left: 0px;
-    width: 100px;
-  }
-
-  70% {
-    left: 200px;
-    width: 56px;
-  }
-
-  90% {
-    left: 256px;
-    width: 0px;
-  }
-} */
