@@ -5,7 +5,22 @@ document.querySelector("input").focus();
 const limit = 50;
 let userInput = "";
 let total = 0;
+let offSet = 0;
 let userIsOnTrending = false;
+let currentSearchTerm = "";
+
+// Copy to clipboard
+const copyToClipboard = (str) => {
+  const el = document.createElement("textarea");
+  el.value = str;
+  el.setAttribute("readonly", "");
+  el.style.position = "absolute";
+  el.style.left = "-9999px";
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+};
 
 // Display error message
 const displayError = (errorMessage) => {
@@ -82,37 +97,74 @@ const endOfList = () => {
   errorMessageWrapperEl.classList.add("center-no-results");
   errorMessageWrapperEl.style.height = "150px";
   errorMessageEl.classList.add("no-results-small");
-  errorMessageEl.textContent = `No more results for "${inputEl.value}"`;
+
+  errorMessageEl.textContent =
+    userIsOnTrending === true
+      ? "Reached end of trending"
+      : `No more results for "${inputEl.value}"`;
 
   errorMessageWrapperEl.appendChild(errorMessageEl);
   document.querySelector(".popup-container").appendChild(errorMessageWrapperEl);
 };
 
 // Generate the list of gifs and append to dom
-const generateList = ({ data }) => {
-  total = total + data.length;
+const generateList = (data) => {
+  total += data.results.length;
+  offSet = data.next;
 
   // Return if user reaches end of list and there are no more results to load
-  if (total > 0 && data.length === 0) {
+  if (total > 0 && data.results.length === 0) {
     endOfList();
     return;
   }
 
   // Handle when there are no results for search term
-  if (data.length === 0) {
+  if (data.results.length === 0) {
     noResults();
     return;
   }
 
-  data.forEach((image) => {
+  data.results.forEach((resultsObj) => {
     const wrapperEl = document.createElement("div");
+    const iconWrapperEl = document.createElement("div");
+    const toolTipWrapper = document.createElement("div");
+    const toolTipText = document.createElement("p");
+    const iconBackground = document.createElement("div");
+    const icon = document.createElement("img");
     const imgEl = document.createElement("img");
 
     wrapperEl.classList.add("gif-container");
+    iconWrapperEl.classList.add("icon-wrapper");
+    iconBackground.classList.add("icon-background");
+    icon.setAttribute("data-src", resultsObj.url);
+    toolTipWrapper.classList.add("tool-tip");
+    toolTipText.classList.add("tool-tip-text");
+
+    icon.classList.add("share-icon");
+    icon.src = "icons/link.svg";
     imgEl.classList.add("gif-styles");
-    imgEl.src = image.images.original.url;
+    imgEl.src = resultsObj.media[0].gif.url;
+    imgEl.setAttribute("loading", "lazy");
+    toolTipText.textContent = "Copy link to clipboard.";
+
+    iconWrapperEl.appendChild(iconBackground);
+    iconWrapperEl.appendChild(toolTipWrapper);
+    iconBackground.appendChild(icon);
+    toolTipWrapper.appendChild(toolTipText);
+
+    // Copy gif url to clipboard when clicking icon
+    iconBackground.addEventListener("click", (e) => {
+      copyToClipboard(e.target.dataset.src);
+      toolTipText.textContent = "Copied to clipboard!";
+      // toolTipWrapper.classList.add("success");
+      setTimeout(function () {
+        // toolTipWrapper.classList.remove("success");
+        toolTipText.textContent = "Copy link to clipboard.";
+      }, 1500);
+    });
 
     wrapperEl.appendChild(imgEl);
+    wrapperEl.appendChild(iconWrapperEl);
     document.querySelector(".popup-container").appendChild(wrapperEl);
   });
 };
@@ -126,7 +178,7 @@ const getSearchResults = async (searchTerm) => {
 
   try {
     const response = await fetch(
-      `http://api.giphy.com/v1/gifs/search?api_key=YOUR_AIP_KEY&q=${searchTerm}&limit=${limit}&offset=${total}`
+      `https://g.tenor.com/v1/search?q=${searchTerm}&key=2JGQI46NCEOI&limit=${limit}&pos=${offSet}&media_filter=minimal`
     );
 
     if (!response.ok) {
@@ -143,10 +195,13 @@ const getSearchResults = async (searchTerm) => {
 
 // Get trending gifs
 const getTrendingResults = async () => {
+  document.querySelector("input").value = "";
+  const apiUrl =
+    offSet === 0
+      ? `https://g.tenor.com/v1/trending?key=2JGQI46NCEOI&limit=${limit}`
+      : `https://g.tenor.com/v1/trending?key=2JGQI46NCEOI&limit=${limit}&pos=${offSet}`;
   try {
-    const response = await fetch(
-      `http://api.giphy.com/v1/gifs/trending?api_key=YOUR_API_KEY&limit=${limit}&offset=${total}`
-    );
+    const response = await fetch(apiUrl);
 
     if (!response.ok) {
       throw new Error(`An error occured: ${response.status}`);
@@ -164,7 +219,7 @@ const getTrendingResults = async () => {
 const getRandomGif = async (keyWord) => {
   try {
     const response = await fetch(
-      `http://api.giphy.com/v1/gifs/random?api_key=YOUR_API_KEY&tag=${keyWord}&rating=g`
+      `https://g.tenor.com/v1/random?key=2JGQI46NCEOI&q=${keyWord}&contentfilter=high&media_filter=minimal&limit=1`
     );
 
     if (!response.ok) {
@@ -173,7 +228,7 @@ const getRandomGif = async (keyWord) => {
 
     const parsedData = await response.json();
 
-    return parsedData.data.images.original.url;
+    return parsedData.results[0].media[0].gif.url;
   } catch (error) {
     console.log(error);
     // Return a fallback gif when there is a problem with the API request
@@ -184,8 +239,10 @@ const getRandomGif = async (keyWord) => {
 // When user hits enter call start the data flow
 document.querySelector("input").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
+    e.target.value = e.target.value.trim();
     userIsOnTrending = false;
     total = 0;
+    offSet = 0;
     document.querySelector(".popup-container").textContent = "";
     window.scrollTo(0, 0);
     getSearchResults(e.target.value);
@@ -195,9 +252,11 @@ document.querySelector("input").addEventListener("keypress", (e) => {
 // When user clicks search icon start data flow
 document.querySelector(".search-icon").addEventListener("click", (e) => {
   const searchInput = document.querySelector("input");
+  searchInput.value = searchInput.value.trim();
   searchInput.focus();
   userIsOnTrending = false;
   total = 0;
+  offSet = 0;
   document.querySelector(".popup-container").textContent = "";
   window.scrollTo(0, 0);
   getSearchResults(searchInput.value);
@@ -206,8 +265,9 @@ document.querySelector(".search-icon").addEventListener("click", (e) => {
 // When user clicks trending icon start data flow
 document.querySelector(".trending-hover").addEventListener("click", (e) => {
   document.querySelector("input").focus();
-  userIsOnTrending = true;
   total = 0;
+  offSet = 0;
+  userIsOnTrending = true;
   document.querySelector(".popup-container").textContent = "";
   window.scrollTo(0, 0);
   getTrendingResults();
@@ -222,7 +282,7 @@ document.addEventListener(
     if (
       scrollTop + clientHeight >= scrollHeight - 0 &&
       !document.querySelector(".center-no-results") &&
-      total !== 0
+      offSet !== ""
     ) {
       loadGifs();
     }
