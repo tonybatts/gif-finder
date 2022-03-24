@@ -80,6 +80,30 @@ body {
   .trending-hover:hover {
     background-color: #484b6a !important;
   }
+
+  .tool-tip {
+    background-color: #d2d3db !important;
+  }
+
+  .tool-tip-text {
+    color: #484b6a !important;
+  }
+
+  .no-results {
+    color: #484b6a !important;
+  }
+
+  .no-results-subtitles {
+    color: #484b6a !important;
+  }
+
+  .icon-background {
+    background-color: #484b6a !important;
+  }
+
+  .icon-wrapper .tool-tip .tool-tip-text::after {
+    border-color: #d2d3db transparent transparent transparent;
+  }
 }
 
 .popup-container {
@@ -95,6 +119,8 @@ body {
 }
 
 .gif-container {
+  overflow: hidden;
+  position: relative;
   width: 33%;
   margin: 1px;
   height: 217px;
@@ -105,6 +131,10 @@ body {
   height: 100%;
   object-fit: cover;
   cursor: grab;
+}
+
+.gif-styles:active {
+  cursor: grabbing;
 }
 
 @keyframes fadeIn {
@@ -317,4 +347,88 @@ header {
   height: 200px;
   object-fit: cover;
   margin-top: 40px;
+}
+
+.icon-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transform: translateY(100%);
+  transition: all 0.3s;
+}
+
+.tool-tip {
+  position: absolute;
+  display: none;
+  bottom: 41px;
+  border-radius: 4px;
+  right: 5px;
+  /* width: 180px; */
+  width: 170px;
+  background-color: #fff;
+  transition: all 0.1s;
+  border: 1px solid rgba(23, 23, 23, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.tool-tip-text {
+  text-align: center;
+  color: #202124;
+  font-size: 12px;
+  font-weight: 600;
+  /* margin: 12px 0; */
+  margin: 10px 0;
+}
+
+.tool-tip.success .tool-tip-text {
+  color: #fff !important;
+}
+
+.gif-container:hover .icon-background {
+  display: block;
+}
+
+.gif-container:hover .icon-wrapper {
+  transform: translateY(0%);
+}
+
+.share-icon {
+  width: 25px;
+  padding: 3px 5px 1px;
+}
+
+.icon-background {
+  margin: 2px;
+  /* border-radius: 6px;
+  background-color: #202124; */
+  border-radius: 3px;
+  background-color: rgba(32, 33, 36, 0.9);
+
+  cursor: pointer;
+}
+
+.icon-background:hover + .tool-tip {
+  display: block;
+}
+
+.tool-tip .tool-tip-text::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  right: 8px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.tool-tip.success .tool-tip-text::after {
+  border-color: #28a745 transparent transparent transparent;
+}
+
+.success {
+  background-color: #28a745 !important;
 }
